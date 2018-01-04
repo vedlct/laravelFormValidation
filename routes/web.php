@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome')->with('test',10);
-});
+Route::get('/','IndexController@index');
 
 Auth::routes();
 
