@@ -12,10 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome')->with('test',10);
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', 'HomeController@insert');
+Route::get('/test',function(){
+
+			return response()->json([
+    'test'
+]);
+
+});
