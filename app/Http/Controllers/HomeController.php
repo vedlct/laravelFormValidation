@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Employees;
 use Auth;
 use Validator;
-
+use Image;
+use App\Photo;
+use Session;
 
 class HomeController extends Controller
 {
@@ -53,12 +55,57 @@ class HomeController extends Controller
 
         $emp->save();
 
-      
 
-      
 
-        return "done";
+        Session::flash('message', 'Posted successfully');
 
+        return redirect()->route('home');
+
+
+    }
+
+
+    public function imageUpload(Request $r){
+        /*use Image Plugin from http://image.intervention.io/getting_started/installation
+         *
+         *
+         *
+         */
+
+        $this->validate($r,[
+
+            'image' => 'image|max:40000',
+
+        ]);
+
+        if ($r->hasFile('image')) {
+            $img = $r->file('image');
+
+
+
+            $image=new Photo;
+
+            $image->save();
+
+
+
+            $filename= $image->id.'.'.$img->getClientOriginalExtension();
+            $image->image=$filename;
+            $image->save();
+
+            $location = public_path('images/'.$filename);
+            //this is the image plugin
+            Image::make($img)->resize(300,200)->save($location);
+
+
+
+            Session::flash('message', 'Image Posted successfully');
+
+            return redirect()->route('home');
+        }
+
+
+        return "not done";
 
     }
 }

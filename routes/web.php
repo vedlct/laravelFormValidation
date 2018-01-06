@@ -17,10 +17,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', 'HomeController@insert');
-Route::get('/test',function(){
 
-			return response()->json([
-    'test'
-]);
+Route::post('/upload_image', 'HomeController@imageUpload');
 
-});
+
+
+Route::get('/autocomplete','IndexController@auto');
+Route::get('/search','IndexController@search')->name('search');
+
