@@ -42,7 +42,7 @@
     <div align="right">
     <div class="form-group">
       <span>max (4 mb)</span>
-      {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
+      {!! $errors->first('image', '<p class="help-block" style="color:red;">:message</p>') !!}
     <input type="file" class="form-control" name="image" style="width: 80%" required>
     </div>
     {!! csrf_field() !!}
